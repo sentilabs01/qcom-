@@ -1,0 +1,996 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Quantum DAO - Decentralized governance for quantum communication">
+    <meta name="keywords" content="Quantum DAO, DAO governance, quantum technology, QCOM token">
+    <meta name="author" content="Quantum DAO Team">
+    <title>DAO Governance - QCom DAO</title>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&family=Montserrat:wght@700&family=Roboto+Mono&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="https://quantumdao.s3.us-east-1.amazonaws.com/QD+Icon.png">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <style>
+        /* Global Styles */
+        :root {
+            --primary-color: #3a0ca3;
+            --secondary-color: #4cc9f0;
+            --accent-color: #f72585;
+            --dark-bg: #0f0e17;
+            --light-bg: #f8f9fa;
+            --text-dark: #2b2c34;
+            --text-light: #fffffe;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--light-bg);
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+        }
+
+        h1 {
+            font-size: 3rem;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        h3 {
+            font-size: 1.5rem;
+        }
+
+        p {
+            margin-bottom: 1rem;
+        }
+
+        a {
+            text-decoration: none;
+            color: var(--primary-color);
+            transition: var(--transition);
+        }
+
+        a:hover {
+            color: var(--accent-color);
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 0;
+        }
+
+        section {
+            padding: 5rem 0;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: var(--text-light);
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .cta-button:hover {
+            background-color: var(--primary-color);
+            color: var(--text-light);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .secondary-button {
+            display: inline-block;
+            background-color: transparent;
+            color: var(--primary-color);
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: var(--transition);
+            border: 2px solid var(--primary-color);
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .secondary-button:hover {
+            background-color: var(--primary-color);
+            color: var(--text-light);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Navigation */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 5%;
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            transition: var(--transition);
+        }
+
+        .navbar.scrolled {
+            padding: 1rem 5%;
+            background-color: rgba(255, 255, 255, 0.98);
+        }
+
+        .logo a {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 1.8rem;
+            color: var(--primary-color);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--text-dark);
+            font-weight: 600;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .burger {
+            display: none;
+            cursor: pointer;
+        }
+
+        .burger div {
+            width: 25px;
+            height: 3px;
+            background-color: var(--text-dark);
+            margin: 5px;
+            transition: var(--transition);
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--dark-bg) 0%, var(--primary-color) 100%);
+            color: var(--text-light);
+            text-align: center;
+            position: relative;
+            margin-top: 0;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+
+        /* DAO Intro */
+        .dao-intro {
+            background: var(--light-bg);
+        }
+
+        .dao-intro-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .dao-intro-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        /* Governance Structure */
+        .governance-structure {
+            background: var(--light-bg);
+        }
+
+        .governance-layers {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .governance-layer {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: var(--transition);
+        }
+
+        .governance-layer:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .layer-icon i {
+            font-size: 2rem;
+            color: var(--secondary-color);
+            margin-bottom: 1rem;
+        }
+
+        .governance-layer h3 {
+            color: var(--primary-color);
+        }
+
+        .governance-layer ul {
+            list-style: none;
+            text-align: left;
+        }
+
+        .governance-layer li {
+            margin-bottom: 0.5rem;
+        }
+
+        .governance-layer li::before {
+            content: '➜';
+            margin-right: 0.5rem;
+            color: var(--secondary-color);
+        }
+
+        /* How to Participate */
+        .how-to-participate {
+            background: var(--light-bg);
+        }
+
+        .participation-methods {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .participation-method {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: var(--transition);
+        }
+
+        .participation-method:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .method-icon i {
+            font-size: 2rem;
+            color: var(--secondary-color);
+            margin-bottom: 1rem;
+        }
+
+        .participation-method h3 {
+            color: var(--primary-color);
+        }
+
+        /* Proposal System */
+        .proposal-system {
+            background: var(--light-bg);
+        }
+
+        .proposal-flow {
+            display: flex;
+            overflow-x: auto;
+            gap: 1rem;
+            padding: 1rem 0;
+        }
+
+        .proposal-stage {
+            background: white;
+            border-left: 4px solid var(--secondary-color);
+            padding: 1rem;
+            min-width: 200px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            border-radius: 8px;
+            flex-shrink: 0;
+        }
+
+        .stage-number {
+            width: 30px;
+            height: 30px;
+            background: var(--primary-color);
+            color: var(--text-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            margin-bottom: 1rem;
+        }
+
+        .proposal-stage h3 {
+            color: var(--primary-color);
+        }
+
+        /* Quadratic Voting */
+        .quadratic-voting {
+            background: var(--primary-color);
+            color: var(--text-light);
+        }
+
+        .quadratic-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .quadratic-text {
+            text-align: left;
+        }
+
+        .quadratic-example {
+            background: white;
+            color: var(--text-dark);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .example-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+
+        .example-table th, .example-table td {
+            padding: 0.5rem;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .example-table th {
+            background-color: var(--secondary-color);
+            color: var(--text-light);
+        }
+
+        /* Legal Structure */
+        .legal-structure {
+            background: var(--light-bg);
+        }
+
+        .legal-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .legal-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        /* Smart Contract */
+        .smart-contract {
+            background: var(--dark-bg);
+            color: var(--text-light);
+        }
+
+        .contract-details {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+
+        .contract-address {
+            font-family: 'Roboto Mono', monospace;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            margin: 1rem 0;
+            word-break: break-all;
+        }
+
+        .contract-functions {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .function-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1rem;
+            border-radius: 8px;
+            border-left: 3px solid var(--accent-color);
+        }
+
+        .function-name {
+            font-family: 'Roboto Mono', monospace;
+            color: var(--secondary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        /* CTA */
+        .cta {
+            background: linear-gradient(135deg, var(--accent-color) 0%, var(--primary-color) 100%);
+            color: var(--text-light);
+            text-align: center;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark-bg);
+            color: var(--text-light);
+            padding: 4rem 0 2rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-logo h3 {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-links {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .link-column h4 {
+            margin-bottom: 1rem;
+            color: var(--secondary-color);
+        }
+
+        .link-column ul {
+            list-style: none;
+        }
+
+        .link-column li {
+            margin-bottom: 0.5rem;
+        }
+
+        .link-column a {
+            color: var(--text-light);
+        }
+
+        .link-column a:hover {
+            color: var(--secondary-color);
+        }
+
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-legal a {
+            color: var(--text-light);
+            margin-left: 1rem;
+        }
+
+        .footer-legal a:hover {
+            color: var(--secondary-color);
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-links {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .dao-intro-content, .legal-content, .quadratic-content {
+                grid-template-columns: 1fr;
+            }
+
+            .governance-layers, .participation-methods {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                position: absolute;
+                right: 0;
+                height: 92vh;
+                top: 8vh;
+                background-color: white;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                width: 50%;
+                transform: translateX(100%);
+                transition: transform 0.5s ease-in;
+                z-index: 999;
+            }
+
+            .nav-links li {
+                opacity: 0;
+                margin: 1.5rem 0;
+            }
+
+            .nav-links.nav-active {
+                transform: translateX(0);
+            }
+
+            .burger {
+                display: block;
+            }
+
+            .hero {
+                height: auto;
+                padding: 6rem 0;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .governance-layers, .participation-methods {
+                grid-template-columns: 1fr;
+            }
+
+            .proposal-flow {
+                flex-direction: column;
+            }
+
+            .footer-links {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .footer-legal {
+                margin-top: 1rem;
+            }
+        }
+
+        @keyframes navLinkFade {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <a href="index.html">QCom DAO</a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="about.html">About</a></li>
+                <li><a href="technology.html">Technology</a></li>
+                <li><a href="governance.html">DAO Governance</a></li>
+                <li><a href="tokenomics.html">Tokenomics</a></li>
+                <li><a href="research.html">Research</a></li>
+                <li><a href="community.html">Community</a></li>
+                <li><a href="contact.html" class="cta-button">Join Us</a></li>
+            </ul>
+            <div class="burger">
+                <div class="line1"></div>
+                <div class="line2"></div>
+                <div class="line3"></div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="container">
+                <h1>DAO Governance</h1>
+                <p>Decentralized decision-making for quantum innovation</p>
+                <a href="#dao-intro" class="cta-button">Learn More</a>
+            </div>
+        </section>
+
+        <section class="dao-intro" id="dao-intro">
+            <div class="container">
+                <h2>What is a DAO?</h2>
+                <div class="dao-intro-content">
+                    <div class="dao-intro-text">
+                        <p>A Decentralized Autonomous Organization (DAO) is a community-run entity with no central authority, governed by transparent rules on a blockchain. QCom DAO uses this model to coordinate resources and accelerate quantum communication advancements.</p>
+                        <p>Our DAO operates through smart contracts on the blockchain, enabling transparent, secure, and efficient governance. Token holders can participate in decision-making processes, propose initiatives, and vote on important matters affecting the future of quantum communication technology.</p>
+                    </div>
+                    <div class="dao-intro-image">
+                        <img src="https://quantumdao.s3.us-east-1.amazonaws.com/image+(17).jpg" alt="DAO Concept Visualization">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="governance-structure">
+            <div class="container">
+                <h2>Governance Structure</h2>
+                <p>A hybrid model balancing expertise and token-based voting.</p>
+                <div class="governance-layers">
+                    <div class="governance-layer">
+                        <div class="layer-icon"><i class="fas fa-flask"></i></div>
+                        <h3>Technical Layer</h3>
+                        <p>Scientific Advisory Board guides research priorities.</p>
+                        <ul>
+                            <li>Expert-led validation</li>
+                            <li>Research direction</li>
+                            <li>Milestone evaluation</li>
+                        </ul>
+                    </div>
+                    <div class="governance-layer">
+                        <div class="layer-icon"><i class="fas fa-chess-knight"></i></div>
+                        <h3>Strategic Layer</h3>
+                        <p>Token holders vote on major initiatives.</p>
+                        <ul>
+                            <li>Quadratic voting</li>
+                            <li>Staking required</li>
+                            <li>Transparent records</li>
+                        </ul>
+                    </div>
+                    <div class="governance-layer">
+                        <div class="layer-icon"><i class="fas fa-cogs"></i></div>
+                        <h3>Operational Layer</h3>
+                        <p>Core team executes decisions daily.</p>
+                        <ul>
+                            <li>Treasury management</li>
+                            <li>Regular updates</li>
+                            <li>Operational efficiency</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="how-to-participate">
+            <div class="container">
+                <h2>How to Participate</h2>
+                <p>Engage in shaping QCom DAO's future.</p>
+                <div class="participation-methods">
+                    <div class="participation-method">
+                        <div class="method-icon"><i class="fas fa-coins"></i></div>
+                        <h3>Hold & Stake QCOM</h3>
+                        <p>Stake tokens for voting power. The longer you stake, the more influence you gain in governance decisions.</p>
+                        <p>Minimum staking period: 7 days</p>
+                        <a href="tokenomics.html" class="cta-button">Tokenomics</a>
+                    </div>
+                    <div class="participation-method">
+                        <div class="method-icon"><i class="fas fa-lightbulb"></i></div>
+                        <h3>Submit Proposals</h3>
+                        <p>Suggest ideas for research funding, infrastructure development, strategic partnerships, and more.</p>
+                        <a href="https://form.jotform.com/251007343057044" class="cta-button">Submit a Proposal</a>
+                    </div>
+                    <div class="participation-method">
+                        <div class="method-icon"><i class="fas fa-vote-yea"></i></div>
+                        <h3>Vote</h3>
+                        <p>Participate in quadratic voting to ensure fair representation regardless of token holdings.</p>
+                        <a href="#quadratic-voting" class="cta-button">Voting System</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="proposal-system" id="proposal-system">
+            <div class="container">
+                <h2>Proposal System</h2>
+                <p>Transparent and fair decision-making process.</p>
+                <div class="proposal-flow">
+                    <div class="proposal-stage">
+                        <div class="stage-number">1</div>
+                        <h3>Ideation</h3>
+                        <p>Discuss ideas in community channels.</p>
+                    </div>
+                    <div class="proposal-stage">
+                        <div class="stage-number">2</div>
+                        <h3>Draft</h3>
+                        <p>Formalize with objectives and budget.</p>
+                    </div>
+                    <div class="proposal-stage">
+                        <div class="stage-number">3</div>
+                        <h3>Review</h3>
+                        <p>Technical validation by experts.</p>
+                    </div>
+                    <div class="proposal-stage">
+                        <div class="stage-number">4</div>
+                        <h3>Feedback</h3>
+                        <p>7-day community review period.</p>
+                    </div>
+                    <div class="proposal-stage">
+                        <div class="stage-number">5</div>
+                        <h3>Voting</h3>
+                        <p>5-day quadratic voting window.</p>
+                    </div>
+                    <div class="proposal-stage">
+                        <div class="stage-number">6</div>
+                        <h3>Implementation</h3>
+                        <p>Execute approved proposals.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="quadratic-voting" id="quadratic-voting">
+            <div class="container">
+                <h2>Quadratic Voting System</h2>
+                <div class="quadratic-content">
+                    <div class="quadratic-text">
+                        <p>QCom DAO uses quadratic voting to ensure fair representation and prevent domination by large token holders. Voting power scales with the square root of tokens staked, not linearly.</p>
+                        <p>This innovative approach balances influence across the community, allowing smaller token holders to have meaningful impact while still rewarding larger stakeholders.</p>
+                        <h3>Key Benefits:</h3>
+                        <ul>
+                            <li>Prevents plutocracy (rule by the wealthy)</li>
+                            <li>Encourages broader participation</li>
+                            <li>Rewards conviction and commitment</li>
+                            <li>Aligns with decentralization principles</li>
+                        </ul>
+                    </div>
+                    <div class="quadratic-example">
+                        <h3>Quadratic Voting Example</h3>
+                        <p>See how voting power scales with token holdings:</p>
+                        <table class="example-table">
+                            <thead>
+                                <tr>
+                                    <th>Tokens Held</th>
+                                    <th>Linear Voting Power</th>
+                                    <th>Quadratic Voting Power</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>1</td>
+                                    <td>1</td>
+                                </tr>
+                                <tr>
+                                    <td>4</td>
+                                    <td>4</td>
+                                    <td>2</td>
+                                </tr>
+                                <tr>
+                                    <td>9</td>
+                                    <td>9</td>
+                                    <td>3</td>
+                                </tr>
+                                <tr>
+                                    <td>100</td>
+                                    <td>100</td>
+                                    <td>10</td>
+                                </tr>
+                                <tr>
+                                    <td>10,000</td>
+                                    <td>10,000</td>
+                                    <td>100</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <p>In quadratic voting, someone with 10,000 tokens has 100x (not 10,000x) the voting power of someone with 1 token.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="legal-structure">
+            <div class="container">
+                <h2>Legal Structure</h2>
+                <div class="legal-content">
+                    <div class="legal-text">
+                        <p>QCom DAO is a Wyoming-based DAO entity, blending decentralization with legal compliance for contracts, intellectual property, and taxes.</p>
+                        <p>This legal framework provides:</p>
+                        <ul>
+                            <li>Limited liability protection for members</li>
+                            <li>Legal recognition for contracts and agreements</li>
+                            <li>Clear framework for intellectual property management</li>
+                            <li>Compliance with regulatory requirements</li>
+                            <li>Transparent governance and accountability</li>
+                        </ul>
+                    </div>
+                    <div class="legal-image">
+                        <img src="https://quantumdao.s3.us-east-1.amazonaws.com/legal-structure.jpg" alt="Legal Structure Diagram">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="smart-contract">
+            <div class="container">
+                <h2>Smart Contract Implementation</h2>
+                <p>QCom DAO is powered by secure, audited smart contracts on the blockchain.</p>
+                
+                <div class="contract-details">
+                    <h3>QCom Token (QCOM)</h3>
+                    <p>ERC20 token with voting capabilities and 1 billion total supply.</p>
+                    <div class="contract-address">0x46A91465904Be866549F24A5D682421ad699fc45</div>
+                    
+                    <h3>QCom Governance</h3>
+                    <p>Governance contract with quadratic voting implementation.</p>
+                    <div class="contract-address">Contract address will be published after deployment</div>
+                    
+                    <h3>Key Functions</h3>
+                    <div class="contract-functions">
+                        <div class="function-card">
+                            <div class="function-name">stakeTokens(uint256 amount)</div>
+                            <p>Stake tokens to gain voting power</p>
+                        </div>
+                        <div class="function-card">
+                            <div class="function-name">unstakeTokens(uint256 amount)</div>
+                            <p>Unstake tokens after minimum period</p>
+                        </div>
+                        <div class="function-card">
+                            <div class="function-name">createProposal(...)</div>
+                            <p>Submit new proposals for voting</p>
+                        </div>
+                        <div class="function-card">
+                            <div class="function-name">castVote(uint256 proposalId, uint8 support)</div>
+                            <p>Vote on active proposals</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta">
+            <div class="container">
+                <h2>Govern the Quantum Future</h2>
+                <p>Join us to drive decentralized innovation in quantum communication.</p>
+                <a href="https://agent.jotform.com/01961753b8127051b72a9090eafa6b7445fa" class="cta-button">Get Involved</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <h3>QCom DAO</h3>
+                    <p>Accelerating the future of secure communication</p>
+                </div>
+                <div class="footer-links">
+                    <div class="link-column">
+                        <h4>Navigation</h4>
+                        <ul>
+                            <li><a href="index.html">Home</a></li>
+                            <li><a href="about.html">About</a></li>
+                            <li><a href="technology.html">Technology</a></li>
+                            <li><a href="governance.html">Governance</a></li>
+                        </ul>
+                    </div>
+                    <div class="link-column">
+                        <h4>Resources</h4>
+                        <ul>
+                            <li><a href="tokenomics.html">Tokenomics</a></li>
+                            <li><a href="research.html">Research</a></li>
+                            <li><a href="https://quantumdao.s3.us-east-1.amazonaws.com/whitepaper/whitepaperwdarkmode.html.html">Whitepaper</a></li>
+                            <li><a href="faq.html">FAQ</a></li>
+                        </ul>
+                    </div>
+                    <div class="link-column">
+                        <h4>Community</h4>
+                        <ul>
+                            <li><a href="https://discord.com/invite/26DHCD3RYB" target="_blank">Discord</a></li>
+                            <li><a href="https://x.com/qubit_dao" target="_blank">Twitter</a></li>
+                            <li><a href="https://t.me/qubit_dao" target="_blank">Telegram</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2025 QCom DAO. All rights reserved.</p>
+                <div class="footer-legal">
+                    <a href="privacy.html">Privacy Policy</a>
+                    <a href="terms.html">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        const burger = document.querySelector('.burger');
+        const navLinks = document.querySelector('.nav-links');
+        const navLinksItems = document.querySelectorAll('.nav-links li');
+
+        burger.addEventListener('click', () => {
+            navLinks.classList.toggle('nav-active');
+            navLinksItems.forEach((link, index) => {
+                if (link.style.animation) {
+                    link.style.animation = '';
+                } else {
+                    link.style.animation = `navLinkFade 0.5s ease forwards ${index / 7 + 0.3}s`;
+                }
+            });
+            burger.classList.toggle('toggle');
+        });
+    </script>
+    <script src='https://cdn.jotfor.ms/s/umd/latest/for-embedded-agent.js'></script>
+    <script>
+      window.addEventListener("DOMContentLoaded", function() {
+        window.AgentInitializer.init({
+          agentRenderURL: "https://agent.jotform.com/01961753b8127051b72a9090eafa6b7445fa",
+          rootId: "JotformAgent-01961753b8127051b72a9090eafa6b7445fa",
+          formID: "01961753b8127051b72a9090eafa6b7445fa",
+          queryParams: ["skipWelcome=1", "maximizable=1"],
+          domain: "https://www.jotform.com",
+          isDraggable: false,
+          background: "linear-gradient(180deg, #F0E4D7 0%, #FCF5EC 100%)",
+          buttonBackgroundColor: "#0A1551",
+          buttonIconColor: "#FFF",
+          variant: false,
+          customizations: {
+            "greeting": "No",
+            "greetingMessage": "Welcome to QCom DAO",
+            "openByDefault": "No",
+            "pulse": "No",
+            "position": "right",
+            "autoOpenChatIn": "0"
+          },
+          isVoice: false,
+        });
+      });
+    </script>
+</body>
+</html>
